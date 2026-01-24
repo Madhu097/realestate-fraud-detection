@@ -1,0 +1,76 @@
+┌─────────────────────────────────────────────────────────────────┐
+│                    TRUTH IN LISTINGS PROJECT                    │
+│                     Fraud Detection System                       │
+└─────────────────────────────────────────────────────────────────┘
+
+📁 major/
+│
+├── 📘 README.md                    # Project overview & quick start
+├── 📘 DEVELOPMENT.md               # Development guide & workflows
+├── 📄 .gitignore                   # Git ignore rules
+│
+├── 🔧 backend/                     # BACKEND SERVER (Python/FastAPI)
+│   │                               # Port: 8000
+│   ├── 📁 app/
+│   │   ├── main.py                # ⚡ FastAPI application entry
+│   │   ├── __init__.py
+│   │   │
+│   │   ├── 📁 routers/            # API endpoints
+│   │   │   ├── __init__.py
+│   │   │   └── analyze.py         # Analysis routes
+│   │   │
+│   │   └── 📁 services/           # Business logic
+│   │       └── __init__.py
+│   │
+│   ├── 📁 venv/                   # Python virtual environment
+│   ├── 📄 requirements.txt        # Python dependencies
+│   ├── 🧪 test_api.py            # API test suite
+│   ├── 📄 .env.example           # Environment template
+│   ├── 📄 .gitignore             # Backend ignore rules
+│   └── 📘 README.md              # Backend documentation
+│
+└── 🎨 frontend/                   # FRONTEND APP (React/Next.js)
+    │                              # Port: 3000 or 5173
+    ├── 📘 README.md              # Frontend documentation
+    ├── 📘 SETUP.md               # Setup instructions
+    └── 📄 .gitignore             # Frontend ignore rules
+    │
+    └── [To be initialized with Vite/Next.js]
+
+═══════════════════════════════════════════════════════════════════
+
+🚀 QUICK START COMMANDS:
+
+┌─ BACKEND (Terminal 1) ──────────────────────────────────────────┐
+│ cd backend                                                       │
+│ .\venv\Scripts\activate                                         │
+│ uvicorn app.main:app --reload                                   │
+│                                                                  │
+│ ✅ Running at: http://localhost:8000                            │
+│ 📚 API Docs: http://localhost:8000/docs                         │
+└──────────────────────────────────────────────────────────────────┘
+
+┌─ FRONTEND (Terminal 2) ─────────────────────────────────────────┐
+│ cd frontend                                                      │
+│ npm create vite@latest . -- --template react                    │
+│ npm install                                                      │
+│ npm run dev                                                      │
+│                                                                  │
+│ ✅ Running at: http://localhost:5173                            │
+└──────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════
+
+📋 CURRENT STATUS:
+
+✅ Backend: Fully configured and tested
+✅ Project structure: Organized and documented
+⏳ Frontend: Ready for initialization
+
+🎯 NEXT STEPS:
+
+1. Keep backend running (already started)
+2. Initialize frontend with your preferred framework
+3. Start building features!
+
+═══════════════════════════════════════════════════════════════════
