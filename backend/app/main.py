@@ -15,7 +15,7 @@ from app.exceptions import (
     validation_exception_handler,
     general_exception_handler
 )
-from app.routers import analyze, image_upload, image_fraud_analysis, history
+from app.routers import analyze, image_upload, image_fraud_analysis, history, websocket
 from app.database import engine
 from app import models
 
@@ -90,6 +90,13 @@ app.include_router(
     history.router,
     prefix=AppConstants.API_PREFIX,
     tags=["Analysis History"]
+)
+
+# WebSocket router for real-time features
+app.include_router(
+    websocket.router,
+    prefix=AppConstants.API_PREFIX,
+    tags=["Real-Time WebSocket"]
 )
 
 # ============================================================

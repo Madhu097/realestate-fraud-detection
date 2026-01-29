@@ -1,39 +1,148 @@
 # Truth in Listings - Backend Dependencies
 # Python 3.9+
 
+# ============================================================
+# CORE FRAMEWORK
+# ============================================================
 # FastAPI Framework
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 python-multipart==0.0.6
+websockets==12.0  # WebSocket support for real-time features
 
 # Pydantic for data validation
 pydantic==2.5.3
 pydantic-settings==2.1.0
 
+# ============================================================
+# DATABASE & CACHING
+# ============================================================
 # Database
 sqlalchemy==2.0.25
+psycopg2-binary==2.9.9  # PostgreSQL adapter
+alembic==1.13.1  # Database migrations
 
+# Redis for caching and message broker
+redis==5.0.1
+hiredis==2.3.2  # C parser for Redis (performance boost)
+
+# ============================================================
+# BACKGROUND JOBS & ASYNC PROCESSING
+# ============================================================
+# Celery for background tasks
+celery==5.3.6
+celery[redis]==5.3.6
+flower==2.0.1  # Celery monitoring tool
+
+# ============================================================
+# ENVIRONMENT & CONFIGURATION
+# ============================================================
 # Environment variables
 python-dotenv==1.0.0
 
+# ============================================================
+# DATA PROCESSING & ML
+# ============================================================
 # Data processing
 pandas==2.1.4
 numpy==1.26.3
 
+# Machine Learning
+scikit-learn==1.4.0
+scipy==1.11.4
+
+# Anomaly Detection
+pyod==1.1.3  # Python Outlier Detection
+
+# ============================================================
+# HTTP & API CLIENTS
+# ============================================================
 # HTTP requests
 httpx==0.26.0
 requests==2.31.0
+aiohttp==3.9.3  # Async HTTP client
 
+# ============================================================
+# IMAGE PROCESSING
+# ============================================================
 # Image processing
 Pillow==10.2.0
+opencv-python==4.9.0.80  # Advanced image processing
+imagehash==4.3.1  # Perceptual image hashing
 
+# ============================================================
+# GEOSPATIAL
+# ============================================================
 # Geospatial
 geopy==2.4.1
 
-# Evaluation (for evaluation module)
-scikit-learn==1.4.0
+# ============================================================
+# AUTHENTICATION & SECURITY
+# ============================================================
+# JWT authentication
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# ============================================================
+# MONITORING & LOGGING
+# ============================================================
+# Structured logging
+python-json-logger==2.0.7
+loguru==0.7.2
+
+# Error tracking
+sentry-sdk[fastapi]==1.40.0
+
+# ============================================================
+# REPORTING & EXPORTS
+# ============================================================
+# PDF generation
+reportlab==4.0.9
 matplotlib==3.8.2
 seaborn==0.13.1
 
+# Excel export
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+
+# ============================================================
+# EMAIL & NOTIFICATIONS
+# ============================================================
+# Email
+fastapi-mail==1.4.1
+
+# ============================================================
+# UTILITIES
+# ============================================================
 # CORS
 python-cors==1.0.0
+
+# Date/time utilities
+python-dateutil==2.8.2
+
+# Validation
+email-validator==2.1.0
+
+# Rate limiting
+slowapi==0.1.9
+
+# ============================================================
+# TESTING (Development)
+# ============================================================
+# Testing
+pytest==7.4.4
+pytest-asyncio==0.23.3
+pytest-cov==4.1.0
+httpx==0.26.0  # For testing async endpoints
+
+# ============================================================
+# CODE QUALITY (Development)
+# ============================================================
+# Code formatting
+black==24.1.1
+isort==5.13.2
+
+# Linting
+flake8==7.0.0
+pylint==3.0.3

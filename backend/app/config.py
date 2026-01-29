@@ -197,9 +197,11 @@ class Settings(BaseSettings):
     # Dataset Settings
     dataset_path: str = AppConstants.DATASET_PATH
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config = {
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "extra": "ignore"  # Ignore extra fields
+    }
 
 
 # Create settings instance
