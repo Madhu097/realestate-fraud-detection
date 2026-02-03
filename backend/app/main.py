@@ -43,10 +43,12 @@ app = FastAPI(
 # ============================================================
 
 # CORS Middleware
+# TEMPORARY: Allow all origins for deployment testing
+# TODO: Restrict to specific domains in production
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins temporarily
+    allow_credentials=False,  # Must be False when using allow_origins=["*"]
     allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["*"],
@@ -103,16 +105,39 @@ app.include_router(
 # HEALTH CHECK ENDPOINTS
 # ============================================================
 
-@app.get(
+@app.api_route(
     "/",
+    methods=["GET", "HEAD"],
+    tags=["Health Check"],
+    summary="Root endpoint",
+    description="Simple root endpoint for uptime monitoring"
+)
+async def root():
+    """
+    Root endpoint - Simple response for monitoring services
+    Supports both GET and HEAD methods for uptime monitoring
+    
+    Returns:
+        dict: Simple status message
+    """
+    return {
+        "status": "ok",
+        "service": "Real Estate Fraud Detection API",
+        "message": "Service is running"
+    }
+
+
+@app.api_route(
+    "/api",
+    methods=["GET", "HEAD"],
     response_model=HealthCheckResponse,
     tags=["Health Check"],
-    summary="Basic health check",
+    summary="API health check",
     description="Returns the basic health status of the API"
 )
-async def root_health_check() -> HealthCheckResponse:
+async def api_health_check() -> HealthCheckResponse:
     """
-    Basic health check endpoint
+    API health check endpoint
     
     Returns:
         HealthCheckResponse: Basic health status
@@ -126,8 +151,9 @@ async def root_health_check() -> HealthCheckResponse:
     )
 
 
-@app.get(
+@app.api_route(
     "/health",
+    methods=["GET", "HEAD"],
     response_model=DetailedHealthCheckResponse,
     tags=["Health Check"],
     summary="Detailed health check",

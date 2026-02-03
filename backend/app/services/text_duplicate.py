@@ -2,9 +2,13 @@
 Text Duplicate Detection Service
 Detects duplicate or highly similar listing descriptions using TF-IDF and cosine similarity
 """
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
+from app.utils.ml_imports import HAS_SKLEARN, HAS_NUMPY, np, get_unavailable_message
+
+# Conditional imports
+if HAS_SKLEARN:
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+
 import json
 import os
 from typing import Tuple, List
@@ -91,6 +95,13 @@ def detect_duplicate_text(description: str, save_to_corpus_flag: bool = True) ->
             - similar_count (int): Number of similar descriptions found
             - similar_texts (list): List of similar text snippets (first 100 chars)
     """
+    # Check if ML libraries are available
+    if not HAS_SKLEARN or not HAS_NUMPY:
+        # Basic keyword-based duplicate detection as fallback
+        if save_to_corpus_flag:
+            save_to_corpus(description)
+        return 0.2, 0, [get_unavailable_message()]
+    
     # Load existing corpus
     corpus = load_text_corpus()
     

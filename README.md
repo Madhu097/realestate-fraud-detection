@@ -2,6 +2,11 @@
 
 A professional fraud detection system to verify property listings and identify fraudulent real estate advertisements.
 
+## 🌐 Live Demo
+
+- **Frontend**: [Deploy on Vercel](https://vercel.com) - See [QUICK_DEPLOY.md](QUICK_DEPLOY.md)
+- **Backend API**: [Deploy on Render](https://render.com) - See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+
 ## ✨ Features
 
 - **Price Fraud Detection** - Identifies suspiciously low or high property prices
@@ -11,7 +16,7 @@ A professional fraud detection system to verify property listings and identify f
 - **Instant Results** - Real-time fraud analysis with detailed reports
 - **Risk Classification** - FAKE, SUSPICIOUS, CAUTION, or REAL verdicts
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Local Development)
 
 ### 1. Install Dependencies
 
@@ -133,7 +138,19 @@ Edit `backend/.env` to configure:
 - CORS protection
 - Safe data handling
 
-## 📝 License
+## � Deployment
+
+Want to deploy this application for free? Follow our guides:
+
+- **Quick Deploy** (30 minutes): [QUICK_DEPLOY.md](QUICK_DEPLOY.md)
+- **Detailed Guide**: [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+- **Checklist**: [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md)
+
+**Recommended Free Hosting:**
+- Backend: [Render](https://render.com) (Free tier)
+- Frontend: [Vercel](https://vercel.com) (Free tier)
+
+## �📝 License
 
 This project is for educational and demonstration purposes.
 

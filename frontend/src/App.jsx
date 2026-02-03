@@ -5,7 +5,7 @@ import ResultDashboard from './components/ResultDashboard';
 import HistoryView from './components/HistoryView';
 import './index.css';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
 function App() {
     const [loading, setLoading] = useState(false);
@@ -118,8 +118,8 @@ function App() {
                     <nav className="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
                         <button
                             className={`${currentView === 'analyze'
-                                    ? 'text-blue-500 border-b-2 border-blue-600'
-                                    : 'hover:text-white'
+                                ? 'text-blue-500 border-b-2 border-blue-600'
+                                : 'hover:text-white'
                                 } cursor-pointer transition-all pb-2 focus:outline-none`}
                             onClick={() => handleViewChange('analyze')}
                         >
@@ -127,8 +127,8 @@ function App() {
                         </button>
                         <button
                             className={`${currentView === 'history'
-                                    ? 'text-blue-500 border-b-2 border-blue-600'
-                                    : 'hover:text-white'
+                                ? 'text-blue-500 border-b-2 border-blue-600'
+                                : 'hover:text-white'
                                 } cursor-pointer transition-all pb-2 focus:outline-none`}
                             onClick={() => handleViewChange('history')}
                         >

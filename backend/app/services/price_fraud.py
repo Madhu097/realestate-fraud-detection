@@ -11,10 +11,10 @@ Methods:
 
 Final score = max(z_score_normalized, iqr_score) for maximum sensitivity
 """
-import pandas as pd
+from app.utils.ml_imports import pd, HAS_PANDAS, get_unavailable_message
 
 
-def detect_price_fraud(listing_price: float, locality: str, city: str, df: pd.DataFrame):
+def detect_price_fraud(listing_price: float, locality: str, city: str, df=None):
     """
     Detect price fraud using combined Z-Score and IQR analysis
     
@@ -22,13 +22,23 @@ def detect_price_fraud(listing_price: float, locality: str, city: str, df: pd.Da
         listing_price: Price of the listing to analyze
         locality: Locality/location name
         city: City name
-        df: Real estate dataset
+        df: Real estate dataset (optional on free tier)
         
     Returns:
         tuple: (fraud_score, explanation)
             - fraud_score (float): 0.0 to 1.0, where 1.0 is definitely fraud
             - explanation (str): Human-readable explanation with statistics
     """
+    # Check if pandas is available
+    if not HAS_PANDAS or df is None:
+        # Basic price validation without ML
+        if listing_price < 100000:
+            return 0.8, f"Price ₹{listing_price:,.0f} seems unusually low. {get_unavailable_message()}"
+        elif listing_price > 100000000:
+            return 0.7, f"Price ₹{listing_price:,.0f} seems unusually high. {get_unavailable_message()}"
+        else:
+            return 0.3, f"Price ₹{listing_price:,.0f} appears reasonable. {get_unavailable_message()}"
+    
     # Filter dataset by city and locality (case-insensitive match)
     # Handle column names flexibly
     
