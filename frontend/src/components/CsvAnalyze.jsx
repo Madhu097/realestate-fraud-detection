@@ -63,6 +63,8 @@ const CsvAnalyze = () => {
         const formData = new FormData();
         formData.append('file', file);
 
+        console.log(`🚀 Sending request to: ${API_BASE_URL}/api/analyze/bulk`);
+
         try {
             const response = await axios.post(`${API_BASE_URL}/api/analyze/bulk`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }

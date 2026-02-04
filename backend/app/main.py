@@ -46,14 +46,7 @@ app = FastAPI(
 # Allow specific origins for production and development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-        "https://realestate-fraud-frontend.vercel.app",
-        "https://*.vercel.app",  # Allow all Vercel preview deployments
-    ],
+    allow_origins=["*"], # Allow all origins for development and multi-device testing
     allow_credentials=False,  # Keep False for security
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
