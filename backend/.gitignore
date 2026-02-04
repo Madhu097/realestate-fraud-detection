@@ -54,8 +54,8 @@ htmlcov/
 *.db
 *.sqlite3
 
-# Data files (large datasets)
-app/data/*.csv
+# Data files (large datasets - allow small CSVs for deployment)
+# app/data/*.csv  # Commented out to include CSV files in deployment
 app/data/*.xlsx
-app/data/*.json
+# app/data/*.json  # Commented out to include JSON files in deployment
 !app/data/.gitkeep

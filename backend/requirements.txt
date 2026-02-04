@@ -115,8 +115,7 @@ fastapi-mail==1.4.1
 # ============================================================
 # UTILITIES
 # ============================================================
-# CORS
-python-cors==1.0.0
+# CORS is built into FastAPI via CORSMiddleware (no extra package needed)
 
 # Date/time utilities
 python-dateutil==2.8.2

@@ -1,0 +1,266 @@
+[
+    {
+        "locality": "Banjara Hills",
+        "city": "Hyderabad",
+        "latitude": 17.4239,
+        "longitude": 78.4738,
+        "avg_price": 12000000,
+        "description": "Premium residential area in Hyderabad"
+    },
+    {
+        "locality": "Jubilee Hills",
+        "city": "Hyderabad",
+        "latitude": 17.4326,
+        "longitude": 78.4071,
+        "avg_price": 14000000,
+        "description": "Upscale locality with luxury properties"
+    },
+    {
+        "locality": "Gachibowli",
+        "city": "Hyderabad",
+        "latitude": 17.4400,
+        "longitude": 78.3489,
+        "avg_price": 8500000,
+        "description": "IT hub with modern apartments"
+    },
+    {
+        "locality": "Madhapur",
+        "city": "Hyderabad",
+        "latitude": 17.4483,
+        "longitude": 78.3915,
+        "avg_price": 9000000,
+        "description": "Tech corridor with commercial and residential"
+    },
+    {
+        "locality": "Hitech City",
+        "city": "Hyderabad",
+        "latitude": 17.4475,
+        "longitude": 78.3667,
+        "avg_price": 10000000,
+        "description": "Major IT and business district"
+    },
+    {
+        "locality": "Kondapur",
+        "city": "Hyderabad",
+        "latitude": 17.4650,
+        "longitude": 78.3647,
+        "avg_price": 7500000,
+        "description": "Rapidly developing IT suburb"
+    },
+    {
+        "locality": "Kukatpally",
+        "city": "Hyderabad",
+        "latitude": 17.4948,
+        "longitude": 78.3985,
+        "avg_price": 6000000,
+        "description": "Well-established residential area"
+    },
+    {
+        "locality": "Miyapur",
+        "city": "Hyderabad",
+        "latitude": 17.4967,
+        "longitude": 78.3583,
+        "avg_price": 5500000,
+        "description": "Metro connected residential locality"
+    },
+    {
+        "locality": "Manikonda",
+        "city": "Hyderabad",
+        "latitude": 17.4019,
+        "longitude": 78.3867,
+        "avg_price": 6500000,
+        "description": "Emerging residential area near Gachibowli"
+    },
+    {
+        "locality": "Kompally",
+        "city": "Hyderabad",
+        "latitude": 17.5500,
+        "longitude": 78.4900,
+        "avg_price": 5800000,
+        "description": "Suburban locality with good connectivity"
+    },
+    {
+        "locality": "Bachupally",
+        "city": "Hyderabad",
+        "latitude": 17.5450,
+        "longitude": 78.3850,
+        "avg_price": 5200000,
+        "description": "Affordable housing area"
+    },
+    {
+        "locality": "Nizampet",
+        "city": "Hyderabad",
+        "latitude": 17.5100,
+        "longitude": 78.3900,
+        "avg_price": 5700000,
+        "description": "Residential locality near Kukatpally"
+    },
+    {
+        "locality": "LB Nagar",
+        "city": "Hyderabad",
+        "latitude": 17.3500,
+        "longitude": 78.5520,
+        "avg_price": 4500000,
+        "description": "Budget-friendly residential area"
+    },
+    {
+        "locality": "Dilsukhnagar",
+        "city": "Hyderabad",
+        "latitude": 17.3687,
+        "longitude": 78.5244,
+        "avg_price": 4800000,
+        "description": "Commercial and residential hub"
+    },
+    {
+        "locality": "Uppal",
+        "city": "Hyderabad",
+        "latitude": 17.4062,
+        "longitude": 78.5591,
+        "avg_price": 5000000,
+        "description": "Developing residential locality"
+    },
+    {
+        "locality": "Secunderabad",
+        "city": "Hyderabad",
+        "latitude": 17.4399,
+        "longitude": 78.4983,
+        "avg_price": 6200000,
+        "description": "Twin city with railway connectivity"
+    },
+    {
+        "locality": "Ameerpet",
+        "city": "Hyderabad",
+        "latitude": 17.4374,
+        "longitude": 78.4482,
+        "avg_price": 6500000,
+        "description": "Central locality with metro access"
+    },
+    {
+        "locality": "SR Nagar",
+        "city": "Hyderabad",
+        "latitude": 17.4300,
+        "longitude": 78.4550,
+        "avg_price": 6000000,
+        "description": "Residential area near Ameerpet"
+    },
+    {
+        "locality": "Kharghar",
+        "city": "Mumbai",
+        "latitude": 19.0330,
+        "longitude": 73.0297,
+        "avg_price": 5200000,
+        "description": "Navi Mumbai locality with good connectivity"
+    },
+    {
+        "locality": "Andheri West",
+        "city": "Mumbai",
+        "latitude": 19.1136,
+        "longitude": 72.8697,
+        "avg_price": 18000000,
+        "description": "Prime Western suburb location"
+    },
+    {
+        "locality": "Andheri East",
+        "city": "Mumbai",
+        "latitude": 19.1197,
+        "longitude": 72.8464,
+        "avg_price": 15000000,
+        "description": "Eastern suburb near airport"
+    },
+    {
+        "locality": "Bandra West",
+        "city": "Mumbai",
+        "latitude": 19.0596,
+        "longitude": 72.8295,
+        "avg_price": 35000000,
+        "description": "Premium Western suburb"
+    },
+    {
+        "locality": "Powai",
+        "city": "Mumbai",
+        "latitude": 19.1176,
+        "longitude": 72.9060,
+        "avg_price": 20000000,
+        "description": "Upscale residential area with lake"
+    },
+    {
+        "locality": "Thane West",
+        "city": "Mumbai",
+        "latitude": 19.2183,
+        "longitude": 72.9781,
+        "avg_price": 8000000,
+        "description": "Thane district locality"
+    },
+    {
+        "locality": "Malad West",
+        "city": "Mumbai",
+        "latitude": 19.1864,
+        "longitude": 72.8480,
+        "avg_price": 12000000,
+        "description": "Western suburb locality"
+    },
+    {
+        "locality": "Borivali West",
+        "city": "Mumbai",
+        "latitude": 19.2403,
+        "longitude": 72.8567,
+        "avg_price": 11000000,
+        "description": "Northern suburb near national park"
+    },
+    {
+        "locality": "Goregaon East",
+        "city": "Mumbai",
+        "latitude": 19.1663,
+        "longitude": 72.8526,
+        "avg_price": 13000000,
+        "description": "Eastern suburb locality"
+    },
+    {
+        "locality": "Kandivali West",
+        "city": "Mumbai",
+        "latitude": 19.2074,
+        "longitude": 72.8320,
+        "avg_price": 10000000,
+        "description": "Western suburb residential area"
+    },
+    {
+        "locality": "Vashi",
+        "city": "Mumbai",
+        "latitude": 19.0768,
+        "longitude": 72.9989,
+        "avg_price": 9000000,
+        "description": "Navi Mumbai commercial hub"
+    },
+    {
+        "locality": "Nerul",
+        "city": "Mumbai",
+        "latitude": 19.0330,
+        "longitude": 73.0199,
+        "avg_price": 7500000,
+        "description": "Navi Mumbai planned locality"
+    },
+    {
+        "locality": "Panvel",
+        "city": "Mumbai",
+        "latitude": 18.9894,
+        "longitude": 73.1175,
+        "avg_price": 4500000,
+        "description": "Navi Mumbai outskirts"
+    },
+    {
+        "locality": "Chembur",
+        "city": "Mumbai",
+        "latitude": 19.0633,
+        "longitude": 72.8997,
+        "avg_price": 16000000,
+        "description": "Central suburb locality"
+    },
+    {
+        "locality": "Dadar",
+        "city": "Mumbai",
+        "latitude": 19.0176,
+        "longitude": 72.8479,
+        "avg_price": 25000000,
+        "description": "Central Mumbai location"
+    }
+]

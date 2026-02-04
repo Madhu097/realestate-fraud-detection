@@ -1,17 +1,22 @@
 import axios from 'axios';
 
 // Backend API base URL - uses environment variable for production
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://fraud-detection-api-8w4r.onrender.com    ';
+
+// Debug: Log the API URL being used
+console.log('🔗 API Base URL:', API_BASE_URL);
+console.log('🔧 Environment:', import.meta.env.MODE);
+console.log('📦 VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL);
 
 // Create axios instance with default config
 const apiClient = axios.create({
     baseURL: API_BASE_URL,
-    timeout: 10000,
+    timeout: 30000, // Increased timeout for analysis requests
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
     },
-    withCredentials: true, // Important for CORS with credentials
+    withCredentials: false, // Must match backend CORS allow_credentials setting
 });
 
 // Request interceptor for debugging

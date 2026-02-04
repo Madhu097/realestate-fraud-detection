@@ -3,6 +3,7 @@ import axios from 'axios';
 import AnalyzeForm from './components/AnalyzeForm';
 import ResultDashboard from './components/ResultDashboard';
 import HistoryView from './components/HistoryView';
+import CsvAnalyze from './components/CsvAnalyze';
 import './index.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
@@ -134,13 +135,22 @@ function App() {
                         >
                             Fraud Database
                         </button>
+                        <button
+                            className={`${currentView === 'bulk'
+                                ? 'text-blue-500 border-b-2 border-blue-600'
+                                : 'hover:text-white'
+                                } cursor-pointer transition-all pb-2 focus:outline-none`}
+                            onClick={() => handleViewChange('bulk')}
+                        >
+                            Bulk Dataset Analysis
+                        </button>
                     </nav>
                 </div>
             </header>
 
             {/* Main Content */}
             <main className="max-w-[1440px] mx-auto py-8 sm:py-16 px-4 sm:px-8">
-                {currentView === 'analyze' ? (
+                {currentView === 'analyze' && (
                     !fraudReport ? (
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
                             {/* Hero Section */}
@@ -190,11 +200,17 @@ function App() {
                             onBack={handleBack}
                         />
                     )
-                ) : (
+                )}
+
+                {currentView === 'history' && (
                     <HistoryView
                         onBack={() => handleViewChange('analyze')}
                         apiBaseUrl={API_BASE_URL}
                     />
+                )}
+
+                {currentView === 'bulk' && (
+                    <CsvAnalyze />
                 )}
             </main>
 
