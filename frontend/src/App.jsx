@@ -102,6 +102,8 @@ function App() {
         setError(null);
     };
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return (
         <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-blue-500/30">
             {/* Header */}
@@ -116,6 +118,23 @@ function App() {
                         </span>
                     </div>
 
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        {isMenuOpen ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        )}
+                    </button>
+
+                    {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
                         <button
                             className={`${currentView === 'analyze'
@@ -146,6 +165,50 @@ function App() {
                         </button>
                     </nav>
                 </div>
+
+                {/* Mobile Navigation Drawer */}
+                {isMenuOpen && (
+                    <nav className="md:hidden border-t border-slate-800 bg-slate-900/95 backdrop-blur-xl animate-in slide-in-from-top duration-300">
+                        <div className="flex flex-col p-4 gap-2 text-[10px] font-black uppercase tracking-[0.2em]">
+                            <button
+                                className={`w-full text-left p-4 rounded-xl ${currentView === 'analyze'
+                                    ? 'bg-blue-600/10 text-blue-500'
+                                    : 'text-slate-500 hover:bg-slate-800 hover:text-white'
+                                    } transition-all`}
+                                onClick={() => {
+                                    handleViewChange('analyze');
+                                    setIsMenuOpen(false);
+                                }}
+                            >
+                                Real Estate Analytics
+                            </button>
+                            <button
+                                className={`w-full text-left p-4 rounded-xl ${currentView === 'history'
+                                    ? 'bg-blue-600/10 text-blue-500'
+                                    : 'text-slate-500 hover:bg-slate-800 hover:text-white'
+                                    } transition-all`}
+                                onClick={() => {
+                                    handleViewChange('history');
+                                    setIsMenuOpen(false);
+                                }}
+                            >
+                                Fraud Database
+                            </button>
+                            <button
+                                className={`w-full text-left p-4 rounded-xl ${currentView === 'bulk'
+                                    ? 'bg-blue-600/10 text-blue-500'
+                                    : 'text-slate-500 hover:bg-slate-800 hover:text-white'
+                                    } transition-all`}
+                                onClick={() => {
+                                    handleViewChange('bulk');
+                                    setIsMenuOpen(false);
+                                }}
+                            >
+                                Bulk Dataset Analysis
+                            </button>
+                        </div>
+                    </nav>
+                )}
             </header>
 
             {/* Main Content */}
