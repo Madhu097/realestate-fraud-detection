@@ -2,6 +2,14 @@
 Truth in Listings - FastAPI Backend
 Main application entry point with improved error handling and configuration
 """
+import sys
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
@@ -202,9 +210,9 @@ async def startup_event():
     print(f"  {AppConstants.APP_NAME} - Backend API")
     print(f"  Version: {AppConstants.APP_VERSION}")
     print("=" * 80)
-    print(f"✅ Application started successfully")
-    print(f"📚 API Documentation: {AppConstants.DOCS_URL}")
-    print(f"🔍 ReDoc Documentation: {AppConstants.REDOC_URL}")
+    print(f"[SUCCESS] Application started successfully")
+    print(f"[INFO] API Documentation: {AppConstants.DOCS_URL}")
+    print(f"[INFO] ReDoc Documentation: {AppConstants.REDOC_URL}")
     print("=" * 80)
 
 
@@ -217,5 +225,5 @@ async def shutdown_event():
     print("=" * 80)
     print(f"  {AppConstants.APP_NAME} - Shutting down")
     print("=" * 80)
-    print("✅ Application shut down successfully")
+    print("[SUCCESS] Application shut down successfully")
     print("=" * 80)
