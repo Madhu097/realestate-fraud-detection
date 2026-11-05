@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AnalyzeForm = ({ listingData, handleChange, handleSubmit, loading }) => {
+const AnalyzeForm = ({ listingData, setListingData, handleChange, handleSubmit, loading }) => {
     return (
         <div className="max-w-4xl mx-auto bg-slate-900/40 backdrop-blur-xl border border-slate-800 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden group">
             {/* Subtle background glow */}
@@ -17,6 +17,67 @@ const AnalyzeForm = ({ listingData, handleChange, handleSubmit, loading }) => {
                 <p className="text-slate-400 text-sm leading-relaxed max-w-lg">
                     Input comprehensive property metrics to trigger our hybrid AI fraud detection sequence.
                 </p>
+            </div>
+
+                        {/* Sample Presets for Quick Testing */}
+            <div className="mb-8 p-4 bg-slate-800/40 border border-slate-700/50 rounded-2xl">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3 flex items-center justify-between">
+                    <span>Quick Test Samples:</span>
+                    <span className="text-blue-400 font-mono text-[9px]">Trained ML Benchmark</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button
+                        type="button"
+                        onClick={() => setListingData && setListingData({
+                            title: 'Spacious 2BHK Apartment in Banjara Hills',
+                            description: 'Beautiful 2BHK apartment with covered parking, lift, power backup, and 24x7 security. Clear title deed.',
+                            price: '9500000',
+                            area_sqft: '1100',
+                            city: 'Hyderabad',
+                            locality: 'Banjara Hills',
+                            latitude: '17.4239',
+                            longitude: '78.4738'
+                        })}
+                        className="py-2.5 px-3 bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 rounded-xl text-[10px] font-bold text-emerald-300 transition-all text-left flex items-center gap-2"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        Authentic Listing
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setListingData && setListingData({
+                            title: 'Ultra Luxury 3BHK Penthouse Urgent Sale',
+                            description: 'Distress emergency sale! Owner relocated abroad. Hurry up! Wire transfer token money deposit required before in-person inspection.',
+                            price: '800000',
+                            area_sqft: '2200',
+                            city: 'Hyderabad',
+                            locality: 'Banjara Hills',
+                            latitude: '17.4239',
+                            longitude: '78.4738'
+                        })}
+                        className="py-2.5 px-3 bg-red-600/20 hover:bg-red-600/30 border border-red-500/30 rounded-xl text-[10px] font-bold text-red-300 transition-all text-left flex items-center gap-2"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-red-400"></span>
+                        Advance-Fee Scam
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setListingData && setListingData({
+                            title: '2BHK Apartment in Andheri West',
+                            description: 'Spacious 2BHK flat near metro and link road.',
+                            price: '16000000',
+                            area_sqft: '900',
+                            city: 'Mumbai',
+                            locality: 'Andheri West',
+                            latitude: '18.5204',
+                            longitude: '73.8567'
+                        })}
+                        className="py-2.5 px-3 bg-amber-600/20 hover:bg-amber-600/30 border border-amber-500/30 rounded-xl text-[10px] font-bold text-amber-300 transition-all text-left flex items-center gap-2"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+                        Location Spoofing
+                    </button>
+                </div>
             </div>
 
             {/* Form */}

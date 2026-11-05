@@ -1,26 +1,10 @@
 [
   {
-    "description": "Verified Luxury Villa. A stunning luxury villa with modern amenities, spacious rooms, and a private pool. Located in a  prime area with excellent views. Perfect for families looking for a premium lifestyle. Includes automated security and high-end finishes.",
-    "metadata": {}
+    "description": "Exquisite luxury penthouse featuring panoramic skyline views, Italian marble flooring, automated smart home controls, and dedicated private elevator. Contact verified management for private inspection.",
+    "metadata": {"locality": "Banjara Hills", "city": "Hyderabad"}
   },
   {
-    "description": "1bhk. all amenties",
-    "metadata": {}
-  },
-  {
-    "description": "1bhk. all amenties",
-    "metadata": {}
-  },
-  {
-    "description": "Test Property. Beautiful apartment with modern amenities",
-    "metadata": {}
-  },
-  {
-    "description": "3bhk. all amenties",
-    "metadata": {}
-  },
-  {
-    "description": "2bhk villa. urgent sale",
-    "metadata": {}
+    "description": "Premium 3BHK flat in upscale gated community with olympic sized pool, multi-court sports arena, 24x7 biometric security, and covered reserved stilt parking.",
+    "metadata": {"locality": "Andheri West", "city": "Mumbai"}
   }
 ]

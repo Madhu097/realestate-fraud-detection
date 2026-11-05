@@ -1,0 +1,11 @@
+[
+  "price_ratio",
+  "pps_zscore",
+  "dist_km",
+  "area",
+  "bedrooms",
+  "area_per_bed",
+  "urgency_kw",
+  "scam_kw",
+  "is_coord_out"
+]

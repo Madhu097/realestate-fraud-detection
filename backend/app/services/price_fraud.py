@@ -1,188 +1,101 @@
-# Price Fraud Module - Finalized on Day 4
-# Do not modify unless required for fusion
-
 """
 Price Fraud Detection Service
-Detects price anomalies using both Z-Score and IQR methods for statistical robustness
-
-Methods:
-1. Z-Score: Measures standard deviations from mean
-2. IQR (Interquartile Range): Detects outliers using quartiles
-
-Final score = max(z_score_normalized, iqr_score) for maximum sensitivity
+Detects price anomalies, severe underpricing (advance-fee scams), and price gouging
+using trained Machine Learning models and locality price-per-sqft distributions.
 """
-from app.utils.ml_imports import pd, HAS_PANDAS, get_unavailable_message
+from app.utils.ml_imports import pd, HAS_PANDAS
+from app.utils.ml_code import estimate_fair_price
 
-
-def detect_price_fraud(listing_price: float, locality: str, city: str, df=None):
+def detect_price_fraud(
+    listing_price: float,
+    locality: str,
+    city: str,
+    area_sqft: float = None,
+    bedrooms: int = None,
+    df=None
+):
     """
-    Detect price fraud using combined Z-Score and IQR analysis
+    Detect price fraud using trained ML price predictor and locality distribution.
     
     Args:
         listing_price: Price of the listing to analyze
-        locality: Locality/location name
+        locality: Locality name
         city: City name
-        df: Real estate dataset (optional on free tier)
+        area_sqft: Floor area in sqft (crucial for per-sqft valuation)
+        bedrooms: Bedroom count (optional)
+        df: Real estate dataset (optional)
         
     Returns:
         tuple: (fraud_score, explanation)
-            - fraud_score (float): 0.0 to 1.0, where 1.0 is definitely fraud
+            - fraud_score (float): 0.0 to 1.0
             - explanation (str): Human-readable explanation with statistics
     """
-    # Check if pandas is available
-    if not HAS_PANDAS or df is None:
-        # Basic price validation without ML
-        if listing_price < 100000:
-            return 0.8, f"Price ₹{listing_price:,.0f} seems unusually low. {get_unavailable_message()}"
-        elif listing_price > 100000000:
-            return 0.7, f"Price ₹{listing_price:,.0f} seems unusually high. {get_unavailable_message()}"
-        else:
-            return 0.3, f"Price ₹{listing_price:,.0f} appears reasonable. {get_unavailable_message()}"
-    
-    # Filter dataset by city and locality (case-insensitive match)
-    # Handle column names flexibly
-    
-    # 1. Filter by City first (if available in dataframe)
-    if 'City' in df.columns:
-        city_df = df[df["City"].str.lower() == city.lower()]
-    elif 'city' in df.columns:
-        city_df = df[df["city"].str.lower() == city.lower()]
-    else:
-        # Fallback if City column missing (Mumbai-only legacy data)
-        city_df = df
+    if listing_price <= 0:
+        return 0.9, "Invalid listing price (₹0 or negative). Property must have a valid non-zero price."
         
-    if len(city_df) == 0:
-        return 0.0, (
-            f"No data available for city '{city}'. "
-            f"Cannot perform reliable price analysis."
+    # If area is provided, perform accurate price-per-sqft and ML valuation
+    if area_sqft and area_sqft > 0:
+        actual_pps = listing_price / area_sqft
+        fair_price, fair_pps, base_pps, loc_std = estimate_fair_price(
+            area=area_sqft,
+            bedrooms=bedrooms or 2,
+            city=city,
+            locality=locality
         )
-
-    # 2. Filter by Locality
-    if 'Location' in df.columns:
-        loc_col = 'Location'
-    elif 'Locality' in df.columns:
-        loc_col = 'Locality'
-    else:
-        loc_col = df.columns[2] # Fallback to 3rd column usually location
         
-    locality_df = city_df[city_df[loc_col].str.lower() == locality.lower()]
-    
-    # EDGE CASE 1: Very small locality samples
-    if len(locality_df) < 5:
-        return 0.0, (
-            f"Insufficient comparable listings in '{locality}' for reliable price analysis. "
-            f"Only {len(locality_df)} properties found (minimum 5 required)."
-        )
-    
-    # Extract price data
-    prices = locality_df["Price"]
-    
-    # Compute basic statistics
-    mean_price = prices.mean()
-    median_price = prices.median()
-    std_price = prices.std()
-    
-    # EDGE CASE 2: Zero variance (all prices identical)
-    if std_price == 0 or pd.isna(std_price):
-        if abs(listing_price - mean_price) < 0.01:
+        ratio = listing_price / max(fair_price, 1000.0)
+        
+        # 1. Normal fair market price range (within 30% of fair market value)
+        if 0.70 <= ratio <= 1.40:
+            deviation_pct = abs(listing_price - fair_price) / fair_price * 100.0
             return 0.0, (
-                f"The listed price matches the standard price for '{locality}' "
-                f"(₹{mean_price:,.0f})."
+                f"The listed price of ₹{listing_price:,.0f} (₹{actual_pps:,.0f}/sqft) is consistent with "
+                f"the ML-estimated fair market value of ₹{fair_price:,.0f} (₹{fair_pps:,.0f}/sqft) "
+                f"for a {area_sqft:,.0f} sqft property in '{locality}', {city} "
+                f"(deviation: {deviation_pct:.1f}%). No price anomaly detected."
             )
-        else:
-            deviation_percent = abs(listing_price - mean_price) / mean_price * 100
-            return 0.8, (
-                f"All properties in '{locality}' are priced at ₹{mean_price:,.0f}, "
-                f"but this listing is {deviation_percent:.1f}% different. "
-                f"This is highly unusual."
-            )
-    
-    # ============================================================
-    # METHOD 1: Z-SCORE ANALYSIS
-    # ============================================================
-    z_score = abs(listing_price - mean_price) / std_price
-    z_score_normalized = min(z_score / 3.0, 1.0)  # z > 3 is 99.7% anomaly
-    
-    # ============================================================
-    # METHOD 2: IQR (INTERQUARTILE RANGE) ANALYSIS
-    # ============================================================
-    Q1 = prices.quantile(0.25)
-    Q3 = prices.quantile(0.75)
-    IQR = Q3 - Q1
-    
-    # IQR bounds (1.5 * IQR is standard for outlier detection)
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    
-    # Check if price is outside IQR bounds
-    if listing_price < lower_bound:
-        iqr_deviation = (lower_bound - listing_price) / IQR
-        iqr_score = min(iqr_deviation / 2.0, 1.0)  # Normalize
-        iqr_flag = "below_lower_bound"
-    elif listing_price > upper_bound:
-        iqr_deviation = (listing_price - upper_bound) / IQR
-        iqr_score = min(iqr_deviation / 2.0, 1.0)  # Normalize
-        iqr_flag = "above_upper_bound"
-    else:
-        iqr_score = 0.0
-        iqr_flag = "within_bounds"
-    
-    # ============================================================
-    # COMBINE BOTH METHODS (Take maximum for robustness)
-    # ============================================================
-    final_fraud_score = max(z_score_normalized, iqr_score)
-    
-    # ============================================================
-    # GENERATE EXAMINER-APPROVED EXPLANATION
-    # ============================================================
-    deviation_percent = abs(listing_price - mean_price) / mean_price * 100
-    
-    # Determine if price is low or high
-    if listing_price < mean_price:
-        direction = "lower"
-        comparison = "below"
-    else:
-        direction = "higher"
-        comparison = "above"
-    
-    # Build detailed explanation based on fraud score
-    if final_fraud_score > 0.6:
-        # HIGH FRAUD RISK
-        explanation = (
-            f"The listed price of ₹{listing_price:,.0f} is {deviation_percent:.1f}% {comparison} "
-            f"the average price of similar properties in '{locality}', which is statistically unusual. "
-            f"Average: ₹{mean_price:,.0f}, Median: ₹{median_price:,.0f}. "
-        )
-        
-        # Add IQR context if flagged
-        if iqr_flag == "below_lower_bound":
-            explanation += (
-                f"This price falls below the normal range (₹{lower_bound:,.0f} - ₹{upper_bound:,.0f}) "
-                f"and may indicate fraud or data entry error."
-            )
-        elif iqr_flag == "above_upper_bound":
-            explanation += (
-                f"This price exceeds the normal range (₹{lower_bound:,.0f} - ₹{upper_bound:,.0f}) "
-                f"and may indicate price manipulation."
-            )
-        else:
-            explanation += "This significant deviation warrants further investigation."
             
-    elif final_fraud_score > 0.3:
-        # MODERATE RISK
-        explanation = (
-            f"The listed price of ₹{listing_price:,.0f} is {deviation_percent:.1f}% {comparison} "
-            f"the average for '{locality}'. "
-            f"Average: ₹{mean_price:,.0f}, Median: ₹{median_price:,.0f}. "
-            f"While not highly suspicious, this deviation is worth noting."
-        )
-        
+        # 2. Mildly discounted (30% to 50% below market value)
+        elif 0.50 <= ratio < 0.70:
+            discount_pct = (fair_price - listing_price) / fair_price * 100.0
+            score = 0.25 + (0.70 - ratio) * 1.0  # Scales 0.25 - 0.45
+            return round(score, 2), (
+                f"The listed price of ₹{listing_price:,.0f} (₹{actual_pps:,.0f}/sqft) is {discount_pct:.1f}% below "
+                f"the ML-estimated fair market value of ₹{fair_price:,.0f} in '{locality}', {city}. "
+                f"While this may represent a good deal, buyers should verify legal ownership and documentation."
+            )
+            
+        # 3. Severe Underpricing (> 50% below market value - Classic Deposit Bait Scam)
+        elif ratio < 0.50:
+            discount_pct = (fair_price - listing_price) / fair_price * 100.0
+            score = min(0.60 + (0.50 - ratio) * 0.9, 0.98) # Scales 0.60 - 0.98
+            return round(score, 2), (
+                f"🚨 SEVERE UNDERPRICING / ADVANCE-FEE SCAM RISK: The listed price of ₹{listing_price:,.0f} "
+                f"(₹{actual_pps:,.0f}/sqft) is {discount_pct:.1f}% below the ML-estimated fair market value "
+                f"of ₹{fair_price:,.0f} (expected range: ₹{fair_price*0.75:,.0f} - ₹{fair_price*1.30:,.0f}) "
+                f"for '{locality}'. Unusually low prices are a common hallmark of deposit fraud where scammers "
+                f"demand token money before viewing."
+            )
+            
+        # 4. Severe Overpricing (> 40% above fair market value)
+        else:
+            premium_pct = (listing_price - fair_price) / fair_price * 100.0
+            score = min(0.35 + (ratio - 1.40) * 0.35, 0.85) # Scales 0.35 - 0.85
+            return round(score, 2), (
+                f"⚠️ SIGNIFICANT OVERPRICING: The listed price of ₹{listing_price:,.0f} "
+                f"(₹{actual_pps:,.0f}/sqft) is {premium_pct:.1f}% higher than the ML-estimated fair "
+                f"market value of ₹{fair_price:,.0f} in '{locality}', {city}. This may indicate price manipulation "
+                f"or speculative inflation."
+            )
+            
+    # Fallback if area_sqft is not provided:
+    fair_price, fair_pps, base_pps, loc_std = estimate_fair_price(
+        area=1000.0, bedrooms=2, city=city, locality=locality
+    )
+    ratio = listing_price / max(fair_price, 1000.0)
+    if 0.5 <= ratio <= 2.0:
+        return 0.0, f"Listed price ₹{listing_price:,.0f} appears within general parameters for '{locality}'."
+    elif ratio < 0.5:
+        return 0.75, f"Listed price ₹{listing_price:,.0f} is unusually low compared to locality averages."
     else:
-        # LOW RISK (Normal)
-        explanation = (
-            f"The listed price of ₹{listing_price:,.0f} is within the normal range for '{locality}'. "
-            f"Average: ₹{mean_price:,.0f}, Median: ₹{median_price:,.0f}. "
-            f"Deviation: {deviation_percent:.1f}%. No price anomaly detected."
-        )
-    
-    return final_fraud_score, explanation
+        return 0.60, f"Listed price ₹{listing_price:,.0f} is unusually high compared to locality averages."

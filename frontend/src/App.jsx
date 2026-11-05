@@ -40,10 +40,10 @@ function App() {
         const payload = {
             listing_data: {
                 ...listingData,
-                price: parseFloat(listingData.price),
-                area_sqft: parseFloat(listingData.area_sqft),
-                latitude: parseFloat(listingData.latitude),
-                longitude: parseFloat(listingData.longitude)
+                price: parseFloat(listingData.price) || 0,
+                area_sqft: parseFloat(listingData.area_sqft) || 0,
+                latitude: isNaN(parseFloat(listingData.latitude)) ? 0.0 : parseFloat(listingData.latitude),
+                longitude: isNaN(parseFloat(listingData.longitude)) ? 0.0 : parseFloat(listingData.longitude)
             }
         };
 

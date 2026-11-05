@@ -18,7 +18,7 @@
     {
         "locality": "Gachibowli",
         "city": "Hyderabad",
-        "latitude": 17.4400,
+        "latitude": 17.44,
         "longitude": 78.3489,
         "avg_price": 8500000,
         "description": "IT hub with modern apartments"
@@ -42,7 +42,7 @@
     {
         "locality": "Kondapur",
         "city": "Hyderabad",
-        "latitude": 17.4650,
+        "latitude": 17.465,
         "longitude": 78.3647,
         "avg_price": 7500000,
         "description": "Rapidly developing IT suburb"
@@ -74,32 +74,32 @@
     {
         "locality": "Kompally",
         "city": "Hyderabad",
-        "latitude": 17.5500,
-        "longitude": 78.4900,
+        "latitude": 17.55,
+        "longitude": 78.49,
         "avg_price": 5800000,
         "description": "Suburban locality with good connectivity"
     },
     {
         "locality": "Bachupally",
         "city": "Hyderabad",
-        "latitude": 17.5450,
-        "longitude": 78.3850,
+        "latitude": 17.545,
+        "longitude": 78.385,
         "avg_price": 5200000,
         "description": "Affordable housing area"
     },
     {
         "locality": "Nizampet",
         "city": "Hyderabad",
-        "latitude": 17.5100,
-        "longitude": 78.3900,
+        "latitude": 17.51,
+        "longitude": 78.39,
         "avg_price": 5700000,
         "description": "Residential locality near Kukatpally"
     },
     {
         "locality": "LB Nagar",
         "city": "Hyderabad",
-        "latitude": 17.3500,
-        "longitude": 78.5520,
+        "latitude": 17.35,
+        "longitude": 78.552,
         "avg_price": 4500000,
         "description": "Budget-friendly residential area"
     },
@@ -138,15 +138,15 @@
     {
         "locality": "SR Nagar",
         "city": "Hyderabad",
-        "latitude": 17.4300,
-        "longitude": 78.4550,
+        "latitude": 17.43,
+        "longitude": 78.455,
         "avg_price": 6000000,
         "description": "Residential area near Ameerpet"
     },
     {
         "locality": "Kharghar",
         "city": "Mumbai",
-        "latitude": 19.0330,
+        "latitude": 19.033,
         "longitude": 73.0297,
         "avg_price": 5200000,
         "description": "Navi Mumbai locality with good connectivity"
@@ -179,7 +179,7 @@
         "locality": "Powai",
         "city": "Mumbai",
         "latitude": 19.1176,
-        "longitude": 72.9060,
+        "longitude": 72.906,
         "avg_price": 20000000,
         "description": "Upscale residential area with lake"
     },
@@ -195,7 +195,7 @@
         "locality": "Malad West",
         "city": "Mumbai",
         "latitude": 19.1864,
-        "longitude": 72.8480,
+        "longitude": 72.848,
         "avg_price": 12000000,
         "description": "Western suburb locality"
     },
@@ -219,7 +219,7 @@
         "locality": "Kandivali West",
         "city": "Mumbai",
         "latitude": 19.2074,
-        "longitude": 72.8320,
+        "longitude": 72.832,
         "avg_price": 10000000,
         "description": "Western suburb residential area"
     },
@@ -234,7 +234,7 @@
     {
         "locality": "Nerul",
         "city": "Mumbai",
-        "latitude": 19.0330,
+        "latitude": 19.033,
         "longitude": 73.0199,
         "avg_price": 7500000,
         "description": "Navi Mumbai planned locality"
@@ -262,5 +262,181 @@
         "longitude": 72.8479,
         "avg_price": 25000000,
         "description": "Central Mumbai location"
+    },
+    {
+        "locality": "Mira Road East",
+        "city": "Mumbai",
+        "latitude": 19.2812,
+        "longitude": 72.8561,
+        "avg_price": 6500000,
+        "description": "Thane district western suburb"
+    },
+    {
+        "locality": "Ulwe",
+        "city": "Mumbai",
+        "latitude": 18.9754,
+        "longitude": 73.0234,
+        "avg_price": 5500000,
+        "description": "Navi Mumbai emerging node near airport"
+    },
+    {
+        "locality": "Kalyan West",
+        "city": "Mumbai",
+        "latitude": 19.2437,
+        "longitude": 73.1355,
+        "avg_price": 4800000,
+        "description": "Thane district central junction"
+    },
+    {
+        "locality": "Nala Sopara",
+        "city": "Mumbai",
+        "latitude": 19.4184,
+        "longitude": 72.8258,
+        "avg_price": 3500000,
+        "description": "Palghar district affordable housing"
+    },
+    {
+        "locality": "Kandivali East",
+        "city": "Mumbai",
+        "latitude": 19.2057,
+        "longitude": 72.866,
+        "avg_price": 12500000,
+        "description": "Western suburb with high-rise developments"
+    },
+    {
+        "locality": "Kamothe",
+        "city": "Mumbai",
+        "latitude": 19.0199,
+        "longitude": 73.0903,
+        "avg_price": 5800000,
+        "description": "Navi Mumbai residential suburb"
+    },
+    {
+        "locality": "Goregaon West",
+        "city": "Mumbai",
+        "latitude": 19.162,
+        "longitude": 72.8427,
+        "avg_price": 14000000,
+        "description": "Western suburb residential hub"
+    },
+    {
+        "locality": "Malad East",
+        "city": "Mumbai",
+        "latitude": 19.1843,
+        "longitude": 72.8597,
+        "avg_price": 11500000,
+        "description": "Western suburb connected to highway"
+    },
+    {
+        "locality": "Mulund West",
+        "city": "Mumbai",
+        "latitude": 19.1726,
+        "longitude": 72.9425,
+        "avg_price": 14500000,
+        "description": "Central suburb near Sanjay Gandhi National Park"
+    },
+    {
+        "locality": "Dombivali East",
+        "city": "Mumbai",
+        "latitude": 19.2184,
+        "longitude": 73.0867,
+        "avg_price": 4200000,
+        "description": "Thane district central suburb"
+    },
+    {
+        "locality": "Ghatkopar East",
+        "city": "Mumbai",
+        "latitude": 19.086,
+        "longitude": 72.909,
+        "avg_price": 16000000,
+        "description": "Central suburb metro hub"
+    },
+    {
+        "locality": "Ghatkopar West",
+        "city": "Mumbai",
+        "latitude": 19.089,
+        "longitude": 72.902,
+        "avg_price": 15500000,
+        "description": "Central suburb residential locality"
+    },
+    {
+        "locality": "Bandra East",
+        "city": "Mumbai",
+        "latitude": 19.0607,
+        "longitude": 72.848,
+        "avg_price": 28000000,
+        "description": "Commercial hub near BKC"
+    },
+    {
+        "locality": "Santacruz West",
+        "city": "Mumbai",
+        "latitude": 19.0833,
+        "longitude": 72.8367,
+        "avg_price": 26000000,
+        "description": "Upscale western suburb"
+    },
+    {
+        "locality": "Juhu",
+        "city": "Mumbai",
+        "latitude": 19.1075,
+        "longitude": 72.8263,
+        "avg_price": 45000000,
+        "description": "Ultra-luxury coastal neighborhood"
+    },
+    {
+        "locality": "Worli",
+        "city": "Mumbai",
+        "latitude": 19.0166,
+        "longitude": 72.8166,
+        "avg_price": 42000000,
+        "description": "South Mumbai premium sea-facing area"
+    },
+    {
+        "locality": "Lower Parel",
+        "city": "Mumbai",
+        "latitude": 18.9953,
+        "longitude": 72.8302,
+        "avg_price": 38000000,
+        "description": "South-central Mumbai commercial district"
+    },
+    {
+        "locality": "Colaba",
+        "city": "Mumbai",
+        "latitude": 18.9067,
+        "longitude": 72.8147,
+        "avg_price": 48000000,
+        "description": "Historic South Mumbai locality"
+    },
+    {
+        "locality": "Khar West",
+        "city": "Mumbai",
+        "latitude": 19.07,
+        "longitude": 72.8333,
+        "avg_price": 32000000,
+        "description": "Prime western suburb adjacent to Bandra"
+    },
+    {
+        "locality": "Kanjurmarg",
+        "city": "Mumbai",
+        "latitude": 19.13,
+        "longitude": 72.93,
+        "avg_price": 11000000,
+        "description": "Central suburb near JVLR"
+    },
+    {
+        "locality": "Vikhroli",
+        "city": "Mumbai",
+        "latitude": 19.11,
+        "longitude": 72.925,
+        "avg_price": 12000000,
+        "description": "Eastern express highway connected suburb"
+    },
+    {
+        "locality": "Airoli",
+        "city": "Mumbai",
+        "latitude": 19.1579,
+        "longitude": 72.9935,
+        "avg_price": 7800000,
+        "description": "Navi Mumbai IT corridor hub"
     }
 ]

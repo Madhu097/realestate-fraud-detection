@@ -4,10 +4,13 @@ Loads the real estate dataset for fraud detection modules
 """
 import pandas as pd
 import os
+from pathlib import Path
 
-# Dataset paths - Try India-wide dataset first, fallback to Mumbai
-INDIA_DATA_FILE = "app/data/india_real_estate.csv"
-MUMBAI_DATA_FILE = "app/data/real_estate.csv"
+# Base data directory
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+INDIA_DATA_FILE = DATA_DIR / "india_real_estate.csv"
+MUMBAI_DATA_FILE = DATA_DIR / "real_estate.csv"
+HYDERABAD_DATA_FILE = DATA_DIR / "hyderabad_real_estate.csv"
 
 def load_dataset():
     """
@@ -28,35 +31,53 @@ def load_dataset():
     Raises:
         FileNotFoundError: If no dataset file exists
     """
-    # Try India-wide dataset first
-    if os.path.exists(INDIA_DATA_FILE):
+    data_file = None
+    if INDIA_DATA_FILE.exists():
         data_file = INDIA_DATA_FILE
-        print(f"📂 Loading India-wide dataset: {INDIA_DATA_FILE}")
-    elif os.path.exists(MUMBAI_DATA_FILE):
+    elif HYDERABAD_DATA_FILE.exists():
+        data_file = HYDERABAD_DATA_FILE
+    elif MUMBAI_DATA_FILE.exists():
         data_file = MUMBAI_DATA_FILE
-        print(f"📂 Loading Mumbai dataset: {MUMBAI_DATA_FILE}")
     else:
         raise FileNotFoundError(
             f"Dataset not found. Tried:\n"
             f"  1. {INDIA_DATA_FILE}\n"
-            f"  2. {MUMBAI_DATA_FILE}\n"
-            "Please generate the dataset first using generate_hyderabad_data.py"
+            f"  2. {HYDERABAD_DATA_FILE}\n"
+            f"  3. {MUMBAI_DATA_FILE}\n"
+            "Please run train_models.py to generate datasets."
         )
     
-    # Load dataset
+    try:
+        print(f"[DataLoader] Loading dataset from {data_file.name}")
+    except Exception:
+        pass
+        
     df = pd.read_csv(data_file, encoding='utf-8', on_bad_lines='skip')
     
     # Standardize column names
     if 'Location' in df.columns and 'Locality' not in df.columns:
         df['Locality'] = df['Location']
-    
+    elif 'Locality' in df.columns and 'Location' not in df.columns:
+        df['Location'] = df['Locality']
+        
+    if 'No. of Bedrooms' in df.columns and 'Bedrooms' not in df.columns:
+        df['Bedrooms'] = df['No. of Bedrooms']
+        
     # Add City column if missing (for Mumbai-only dataset)
     if 'City' not in df.columns:
         df['City'] = 'Mumbai'
+        
+    # Ensure numeric columns
+    df['Price'] = pd.to_numeric(df['Price'], errors='coerce')
+    df['Area'] = pd.to_numeric(df['Area'], errors='coerce')
+    df = df.dropna(subset=['Price', 'Area'])
     
-    print(f"✅ Dataset loaded: {len(df)} properties")
-    if 'City' in df.columns:
-        print(f"   Cities: {df['City'].unique().tolist()}")
-    print(f"   Price range: ₹{df['Price'].min():,.0f} - ₹{df['Price'].max():,.0f}")
-    
+    if 'Price_Per_Sqft' not in df.columns:
+        df['Price_Per_Sqft'] = df['Price'] / df['Area']
+        
+    try:
+        print(f"[DataLoader] Dataset loaded: {len(df)} properties across {len(df['Locality'].unique())} localities.")
+    except Exception:
+        pass
+        
     return df

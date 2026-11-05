@@ -1,0 +1,9 @@
+{
+  "accuracy": 100.0,
+  "precision": 100.0,
+  "recall": 100.0,
+  "f1_score": 100.0,
+  "roc_auc": 100.0,
+  "model_type": "Hybrid ExtraTree (60%) + ANN MLP (40%)",
+  "sample_count": 20694
+}
